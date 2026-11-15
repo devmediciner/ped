@@ -17,8 +17,7 @@ Aplicação web moderna, responsiva e de alta precisão para emergências pediá
    - Prescrição pronta: *"Reconstituir [X] frasco(s) de 1g em [Y] ml de ABD e injetar lentamente [Z] ml EV"*.
 
 3. **Versão Desktop & Mobile**:
-   - **Desktop / Web:** 4 colunas perfeitamente distribuídas (`DROGA E APRESENTAÇÃO`, `DOSE`, `PRESCRIÇÃO`, `Doses menores 1ml`).
-   - **Mobile (Smartphones):** 100% vertical, sem necessidade de rolagem lateral (`overflow-x: hidden`), exibindo a dose por kg ao lado do nome da medicação em cards individuais.
+   - **Formato Planilha em Qualquer Tela:** 3 colunas perfeitamente distribuídas (`DROGA E APRESENTAÇÃO`, `DOSE`, `PRESCRIÇÃO`), aproveitando 100% da largura horizontal tanto no PC quanto em smartphones, com rolagem vertical fluida.
 
 4. **Impressão em A4 Otimizada (2 Páginas)**:
    - **Página 1:** Cabeçalho do paciente e Bloco completo de Drogas em Bólus / Reanimação / RSI.

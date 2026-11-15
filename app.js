@@ -924,7 +924,7 @@ function renderOfficialTable(peso) {
         if (drug.section === 'continuo') {
           html += `
             <tr class="table-section-row">
-              <td colspan="4" class="td-section-title">DROGAS PARA INFUSÃO CONTÍNUA</td>
+              <td colspan="3" class="td-section-title">DROGAS PARA INFUSÃO CONTÍNUA</td>
             </tr>
           `;
         }
@@ -933,7 +933,6 @@ function renderOfficialTable(peso) {
 
       matchingRows.forEach(subRow => {
         totalVisible++;
-        const ueDisplay = subRow.ue ? `<span class="ue-val">${subRow.ue}</span>` : '<span class="ue-empty">ue100</span>';
         let drugTitle = `<strong>${drug.name}</strong>`;
         if (drug.subType) {
           drugTitle += ` <span class="sub-tag">${drug.subType}</span>`;
@@ -943,7 +942,6 @@ function renderOfficialTable(peso) {
             <td class="td-drug" data-label="Droga">${drugTitle}</td>
             <td class="td-dose" data-label="Dose">${subRow.dose}</td>
             <td class="td-presc" data-label="Prescrição">${subRow.presc}</td>
-            <td class="td-ue ${subRow.ue ? '' : 'ue-empty'}" data-label="Doses < 1ml">${ueDisplay}</td>
           </tr>
         `;
       });
@@ -959,7 +957,7 @@ function renderOfficialTable(peso) {
         if (drug.section === 'continuo') {
           html += `
             <tr class="table-section-row">
-              <td colspan="4" class="td-section-title">DROGAS PARA INFUSÃO CONTÍNUA</td>
+              <td colspan="3" class="td-section-title">DROGAS PARA INFUSÃO CONTÍNUA</td>
             </tr>
           `;
         }
@@ -967,8 +965,6 @@ function renderOfficialTable(peso) {
       }
 
       totalVisible++;
-      const ueDisplay = calc.ue100 ? `<span class="ue-val">${calc.ue100} ue100</span>` : '<span class="ue-empty">ue100</span>';
-      
       let drugTitle = `<strong>${drug.name}</strong>`;
       if (drug.subType) {
         drugTitle += ` <span class="sub-tag">${drug.subType}</span>`;
@@ -979,7 +975,6 @@ function renderOfficialTable(peso) {
           <td class="td-drug" data-label="Droga">${drugTitle}</td>
           <td class="td-dose" data-label="Dose">${doseText}</td>
           <td class="td-presc" data-label="Prescrição">${calc.prescricaoHtml}</td>
-          <td class="td-ue ${calc.ue100 ? '' : 'ue-empty'}" data-label="Doses < 1ml">${ueDisplay}</td>
         </tr>
       `;
     }
@@ -988,7 +983,7 @@ function renderOfficialTable(peso) {
   if (totalVisible === 0) {
     html = `
       <tr>
-        <td colspan="4" style="text-align: center; padding: 2rem 1rem; color: #6b7280; font-size: 0.95rem;">
+        <td colspan="3" style="text-align: center; padding: 2rem 1rem; color: #6b7280; font-size: 0.95rem;">
           Nenhum medicamento encontrado para "<strong>${AppState.searchQuery}</strong>".
         </td>
       </tr>
