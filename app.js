@@ -4,13 +4,37 @@
  */
 
 // ==========================================================================
+// Gerador Aleatório de Nomes Pediátricos com Sobrenome Composto
+// ==========================================================================
+function getRandomPatientName() {
+  const firstNames = ['Enzo', 'Gael', 'Théo', 'Heitor', 'Ravi', 'Noah'];
+  const compoundSurnames = [
+    'Silva Santos',
+    'Oliveira Costa',
+    'Pereira Lima',
+    'Souza Ribeiro',
+    'Almeida Castro',
+    'Miranda Carvalho',
+    'Ferreira Gomes',
+    'Rodrigues Alves',
+    'Barbosa Martins',
+    'Nascimento Ramos',
+    'Cardoso Melo',
+    'Moreira Dias'
+  ];
+  const first = firstNames[Math.floor(Math.random() * firstNames.length)];
+  const surname = compoundSurnames[Math.floor(Math.random() * compoundSurnames.length)];
+  return `${first} ${surname}`;
+}
+
+// ==========================================================================
 // Estado Global da Aplicação
 // ==========================================================================
 const AppState = {
   peso: 15.0,
   idadeAnos: 3,
   idadeMeses: 0,
-  nome: 'PACIENTE PEDIÁTRICO',
+  nome: getRandomPatientName(),
   searchQuery: ''
 };
 
@@ -463,7 +487,7 @@ const DRUGS_DATABASE = [
     name: 'PRECEDEX 100MCG/ML (2ML)',
     subType: 'indução',
     section: 'bolus',
-    doseDesc: '0.5-1mcg/kg/bolus',
+    doseDesc: '0,5 a 1<br>mcg/kg (bólus)',
     calculate: (peso) => {
       const minVol = (peso * 0.25).toFixed(2).replace(/0$/, '');
       const maxVol = (peso * 0.50).toFixed(1).replace('.0', '');
@@ -472,7 +496,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Precedex (Dexmedetomidina) Indução: Diluir 2ml em 48ml SF (4 mcg/ml). Fazer bólus de ${minVol} a ${maxVol} ml EV.`,
         volumeMl: parseFloat(minVol),
         ue100: null,
-        doseDisplay: '0.5-1mcg/kg/bolus'
+        doseDisplay: '0,5 a 1<br>mcg/kg (bólus)'
       };
     }
   },
@@ -481,7 +505,7 @@ const DRUGS_DATABASE = [
     name: 'KETAMINA 50MG/ML (2ML)',
     subType: 'indução',
     section: 'bolus',
-    doseDesc: '1-4 MG/kg',
+    doseDesc: '1 a 4<br>mg/kg',
     calculate: (peso) => {
       const minVol = (peso * 1).toFixed(0);
       const maxVol = (peso * 4).toFixed(0);
@@ -491,7 +515,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Ketamina Indução: Diluir 2ml em 98ml SF (1 mg/ml). Fazer de ${minVol} a ${maxVol} ml EV (Máx ${maxPrecedex} ml se associado a Precedex).`,
         volumeMl: parseFloat(minVol),
         ue100: null,
-        doseDisplay: '1-4 MG/kg'
+        doseDisplay: '1 a 4<br>mg/kg'
       };
     }
   },
@@ -499,7 +523,7 @@ const DRUGS_DATABASE = [
     key: 'nacl_3',
     name: 'Cloreto de sódio 10% diluída (3%)',
     section: 'bolus',
-    doseDesc: '3% - 2,5 mEq/kg',
+    doseDesc: '3%<br>(2,5 mEq/kg)',
     calculate: (peso) => {
       const total = (peso * 5.0).toFixed(0);
       return {
@@ -507,7 +531,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Salina 3% (Diluir 30ml de NaCl 10% em 70ml de ABD): Fazer ${total} ml EV em 15 min (5 ml/kg).`,
         volumeMl: parseFloat(total),
         ue100: null,
-        doseDisplay: '3% - 2,5 mEq/kg'
+        doseDisplay: '3%<br>(2,5 mEq/kg)'
       };
     }
   },
@@ -520,7 +544,7 @@ const DRUGS_DATABASE = [
     name: 'PRECEDEX',
     subType: 'Contínuo',
     section: 'continuo',
-    doseDesc: '0.2-0.7mcg/KG/H',
+    doseDesc: '0,2 a 0,7<br>mcg/kg/h',
     calculate: (peso) => {
       const minRate = (peso * 0.25).toFixed(2).replace(/0$/, '');
       const maxRate = (peso * 0.40).toFixed(1).replace('.0', '');
@@ -529,7 +553,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Precedex Contínuo: Diluir 2ml em 48ml SF. Correr em BIC de ${minRate} a ${maxRate} ml/h EV.`,
         volumeMl: null,
         ue100: null,
-        doseDisplay: '0.2-0.7mcg/KG/H'
+        doseDisplay: '0,2 a 0,7<br>mcg/kg/h'
       };
     }
   },
@@ -538,7 +562,7 @@ const DRUGS_DATABASE = [
     name: 'MIDAZOLAM (15 mg/3 ml)',
     subType: 'Manutenção 1mg/ml',
     section: 'continuo',
-    doseDesc: '1MG/ML PÓS DILUIR',
+    doseDesc: '1 mg/ml<br>(pós diluição)',
     calculate: (peso) => {
       const minRate = (peso * 0.01).toFixed(2).replace(/0$/, '');
       const maxRate = (peso * 0.20).toFixed(1).replace('.0', '');
@@ -547,7 +571,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Midazolam Manutenção (1mg/ml): Diluir 10ml em 490ml SF. Correr de ${minRate} até ${maxRate} ml/h EV.`,
         volumeMl: null,
         ue100: null,
-        doseDisplay: '1MG/ML PÓS DILUIR'
+        doseDisplay: '1 mg/ml<br>(pós diluição)'
       };
     }
   },
@@ -556,7 +580,7 @@ const DRUGS_DATABASE = [
     name: 'KETAMINA 50MG/ML - 2ML',
     subType: 'Manutenção 1mg/ml',
     section: 'continuo',
-    doseDesc: '1MG/ML APÓS DILUIR',
+    doseDesc: '1 mg/ml<br>(pós diluição)',
     calculate: (peso) => {
       const minRate = (peso * 0.5).toFixed(1).replace('.0', '');
       const maxRate = (peso * 2.0).toFixed(0);
@@ -565,7 +589,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Ketamina Manutenção (1mg/ml): Diluir 2ml em 98ml SF. Correr de ${minRate} até ${maxRate} ml/h EV.`,
         volumeMl: null,
         ue100: null,
-        doseDisplay: '1MG/ML APÓS DILUIR'
+        doseDisplay: '1 mg/ml<br>(pós diluição)'
       };
     }
   },
@@ -574,7 +598,7 @@ const DRUGS_DATABASE = [
     name: 'Midazolam (15 mg/3 ml)',
     subType: 'Solução 50ml SGI',
     section: 'continuo',
-    doseDesc: '1 µg/Kg/m',
+    doseDesc: '1 µg/Kg<br>/min',
     calculate: (peso) => {
       const volDrog = (peso * 0.6).toFixed(1).replace('.0', '');
       const volDil = (50.0 - (peso * 0.6)).toFixed(1).replace('.0', '');
@@ -583,7 +607,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Midazolam Contínuo (50ml): Diluir ${volDrog} ml em ${volDil} ml de SGI e correr a 1 ml/h EV (1 mcg/kg/min).`,
         volumeMl: parseFloat(volDrog),
         ue100: null,
-        doseDisplay: '1 µg/Kg/m'
+        doseDisplay: '1 µg/Kg<br>/min'
       };
     }
   },
@@ -592,7 +616,7 @@ const DRUGS_DATABASE = [
     name: 'Fentanil (50 mcg/ml)',
     subType: 'Solução 50ml SGI',
     section: 'continuo',
-    doseDesc: '1 µg/Kg/h',
+    doseDesc: '1 µg/Kg<br>/h',
     calculate: (peso) => {
       const volDrog = peso.toFixed(1).replace('.0', '');
       const volDil = (50.0 - peso).toFixed(1).replace('.0', '');
@@ -601,7 +625,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Fentanil Contínuo (50ml): Diluir ${volDrog} ml em ${volDil} ml de SGI e correr a 1 ml/h EV (1 mcg/kg/h).`,
         volumeMl: parseFloat(volDrog),
         ue100: null,
-        doseDisplay: '1 µg/Kg/h'
+        doseDisplay: '1 µg/Kg<br>/h'
       };
     }
   },
@@ -610,7 +634,7 @@ const DRUGS_DATABASE = [
     name: 'Dobutamina (250mg/20ml)',
     subType: 'Solução 50ml SGI',
     section: 'continuo',
-    doseDesc: '5 µg/Kg/min',
+    doseDesc: '5 µg/Kg<br>/min',
     calculate: (peso) => {
       const volDrog = (peso * 0.5).toFixed(1).replace('.0', '');
       const volDil = (50.0 - (peso * 0.5)).toFixed(1).replace('.0', '');
@@ -619,7 +643,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Dobutamina (50ml): Diluir ${volDrog} ml em ${volDil} ml de SGI e correr a 2.5 ml/h EV (5 mcg/kg/min). Concentração: 1875 mcg/ml.`,
         volumeMl: parseFloat(volDrog),
         ue100: null,
-        doseDisplay: '5 µg/Kg/min'
+        doseDisplay: '5 µg/Kg<br>/min'
       };
     }
   },
@@ -628,7 +652,7 @@ const DRUGS_DATABASE = [
     name: 'Adrenalina/Nora (1mg/ml)',
     subType: 'Solução 50ml SGI',
     section: 'continuo',
-    doseDesc: '0,2 µg/Kg/min',
+    doseDesc: '0,2 µg/Kg<br>/min',
     calculate: (peso) => {
       const volDrog = (peso * 0.3).toFixed(1).replace('.0', '');
       const volDil = (50.0 - (peso * 0.3)).toFixed(1).replace('.0', '');
@@ -637,7 +661,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Adrenalina ou Nora (50ml): Diluir ${volDrog} ml em ${volDil} ml de SGI e correr a 2 ml/h EV (0,2 mcg/kg/min). Concentração: 90 mcg/ml.`,
         volumeMl: parseFloat(volDrog),
         ue100: null,
-        doseDisplay: '0,2 µg/Kg/min'
+        doseDisplay: '0,2 µg/Kg<br>/min'
       };
     }
   },
@@ -659,21 +683,21 @@ const DRUGS_DATABASE = [
       return {
         rows: [
           {
-            dose: '0,1 mg/Kg IM',
+            dose: '0,1 mg/Kg<br>IM',
             presc: `Fazer <span class="num-bold">${volIm}</span> ml IM ou SC`,
             ue: `${ueIm} ue100`,
             ueNum: ueIm,
             prescText: `Fenilefrina IM/SC: Fazer ${volIm} ml (${ueIm} ue100).`
           },
           {
-            dose: '5 µg/Kg EV',
+            dose: '5 µg/Kg<br>EV',
             presc: `Diluir 1ml em 9ml de ABD e fazer <span class="num-bold">${volEvBolus}</span> ml EV`,
             ue: `${ueEvBolus} ue100`,
             ueNum: parseFloat(ueEvBolus),
             prescText: `Fenilefrina EV Bólus: Diluir 1 ml em 9ml ABD e fazer ${volEvBolus} ml (${ueEvBolus} ue100).`
           },
           {
-            dose: '0,1 µg/Kg/min',
+            dose: '0,1 µg/Kg<br>/min',
             presc: `Diluir 5ml da solução 1:9 em 100ml de SGI e correr a <span class="num-bold">${rateCont}</span> ml/h EV`,
             ue: '',
             ueNum: null,
@@ -688,7 +712,7 @@ const DRUGS_DATABASE = [
     key: 'milrinona',
     name: 'Milrinona (1mg/ml)',
     section: 'continuo',
-    doseDesc: '0,25 mcg/Kg/min',
+    doseDesc: '0,25 mcg/Kg<br>/min',
     calculate: (peso) => {
       const rate = (peso * 0.15).toFixed(2).replace(/0$/, '');
       return {
@@ -696,7 +720,7 @@ const DRUGS_DATABASE = [
         prescricaoText: `Milrinona (1mg/ml): Diluir 10ml em 90ml de SGI (Total 100 ml) e correr a ${rate} ml/h EV (0,25 mcg/kg/min).`,
         volumeMl: null,
         ue100: null,
-        doseDisplay: '0,25 mcg/Kg/min'
+        doseDisplay: '0,25 mcg/Kg<br>/min'
       };
     }
   },
@@ -704,7 +728,7 @@ const DRUGS_DATABASE = [
     key: 'acido_tranexamico',
     name: 'Ácido tranexâmico 50mg/ml',
     section: 'continuo',
-    doseDesc: '15mg/Kg Bolus<br>15mg/Kg em 8h',
+    doseDesc: '15 mg/Kg Bólus<br>15 mg/Kg em 8h',
     isMultiRow: true,
     calculate: (peso) => {
       const volBolus = (peso * 0.3).toFixed(1).replace('.0', '');
@@ -714,14 +738,14 @@ const DRUGS_DATABASE = [
       return {
         rows: [
           {
-            dose: '15mg/Kg Bolus',
+            dose: '15 mg/Kg<br>Bólus',
             presc: `Fazer <span class="num-bold">${volBolus}</span> ml EV ou IO`,
             ue: '',
             ueNum: null,
             prescText: `Ácido tranexâmico Bólus: Fazer ${volBolus} ml EV ou IO.`
           },
           {
-            dose: '15mg/Kg em 8h',
+            dose: '15 mg/Kg<br>em 8h',
             presc: `Diluir <span class="num-bold">${volBolus}</span> ml em <span class="num-bold">${volDiluent}</span> ml de NaCl 0,9% e correr a <span class="num-bold">${rate8h}</span> ml/h EV`,
             ue: '',
             ueNum: null,
@@ -1025,10 +1049,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. Ouvinte de Nome
   const inputNome = document.getElementById('inputNome');
-  inputNome.addEventListener('input', (e) => {
-    AppState.nome = e.target.value;
-    document.getElementById('sheetNome').textContent = AppState.nome || 'PACIENTE NÃO INFORMADO';
-  });
+  if (inputNome) {
+    inputNome.value = AppState.nome;
+    inputNome.addEventListener('input', (e) => {
+      AppState.nome = e.target.value;
+      document.getElementById('sheetNome').textContent = AppState.nome || 'PACIENTE NÃO INFORMADO';
+    });
+  }
 
   // 4. Barra de Pesquisa de Medicamentos na Folha
   const sheetSearchInput = document.getElementById('sheetSearchInput');

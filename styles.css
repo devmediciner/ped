@@ -513,6 +513,7 @@ body.theme-dark .search-box input:focus {
 
 .sheet-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.82rem;
   border: 1.5px solid #111827;
@@ -523,6 +524,8 @@ body.theme-dark .search-box input:focus {
   border: 1px solid #374151;
   padding: 4px 6px;
   vertical-align: middle;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .sheet-table th {
@@ -546,6 +549,8 @@ body.theme-dark .search-box input:focus {
 .td-drug {
   font-weight: 700;
   color: #111827;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .sub-tag {
@@ -567,11 +572,16 @@ body.theme-dark .search-box input:focus {
   font-weight: 700;
   font-size: 0.78rem;
   color: #1f2937;
-  white-space: nowrap;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.25 !important;
 }
 
 .td-presc {
   line-height: 1.35;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
 }
 
 .num-bold {
@@ -1102,7 +1112,7 @@ body.theme-dark .badge-shock {
   /* Distribuição das 3 colunas na horizontal do celular */
   .sheet-table th:nth-child(1),
   .sheet-table td.td-drug {
-    width: 32% !important;
+    width: 31% !important;
     font-size: 0.64rem;
     font-weight: 700;
     color: #111827;
@@ -1110,28 +1120,35 @@ body.theme-dark .badge-shock {
     border-bottom: 1px solid #374151 !important;
     margin: 0 !important;
     padding: 2.5px 2px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .sheet-table th:nth-child(2),
   .sheet-table td.td-dose {
     display: table-cell !important;
-    width: 16% !important;
+    width: 18% !important;
     font-size: 0.62rem;
     font-weight: 700;
     text-align: center;
     color: #111827;
-    white-space: nowrap;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.2 !important;
     padding: 2.5px 1px !important;
   }
 
   .sheet-table th:nth-child(3),
   .sheet-table td.td-presc {
-    width: 52% !important;
+    width: 51% !important;
     font-size: 0.64rem;
     line-height: 1.25;
     text-align: left;
     color: #111827;
     padding: 2.5px 2px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   /* Tag de dose embutida no mobile: OCULTAR pois a coluna DOSE já está visível */
@@ -1437,31 +1454,39 @@ body.theme-dark .badge-shock {
   /* Colunas no formato de impressão (3 Colunas) */
   .sheet-table th:nth-child(1),
   .sheet-table td.td-drug {
-    width: 32% !important;
+    width: 31% !important;
     text-align: left !important;
     font-weight: 700 !important;
     border-bottom: 1px solid black !important;
     margin: 0 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .sheet-table th:nth-child(2),
   .sheet-table td.td-dose {
     display: table-cell !important;
-    width: 16% !important;
+    width: 18% !important;
     text-align: center !important;
     font-weight: 700 !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.2 !important;
     color: black !important;
     font-size: 7.2pt !important;
+    padding: 3px 2px !important;
   }
 
   .sheet-table th:nth-child(3),
   .sheet-table td.td-presc {
-    width: 52% !important;
+    width: 51% !important;
     text-align: left !important;
     font-size: 7.5pt !important;
     line-height: 1.25 !important;
     margin: 0 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   /* Esconder tag de dose do mobile ao imprimir */
