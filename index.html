@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergência Pediátrica</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2.2'><path d='M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14'/></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-light">
+
+  <!-- Header Superior Simples e Limpo -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" fill="none">
+            <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Emergência Pediátrica</h1>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="btn-icon" title="Alternar tema claro/escuro">
+          <svg id="themeMoon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="themeSun" class="hidden" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <button id="printBtn" class="btn btn-primary" title="Imprimir Folha de Atendimento em A4">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Imprimir Folha A4</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Barra Compacta e Simples: Apenas Nome, Peso e Idade -->
+  <section class="patient-compact-bar">
+    <div class="container">
+      <div class="patient-form-row">
+        <!-- Nome -->
+        <div class="input-box box-name">
+          <label for="inputNome">Nome do Paciente</label>
+          <input type="text" id="inputNome" value="PACIENTE PEDIÁTRICO" placeholder="Nome completo da criança">
+        </div>
+
+        <!-- Peso -->
+        <div class="input-box box-weight">
+          <label for="inputPeso">Peso (Kg)</label>
+          <div class="input-with-unit">
+            <input type="number" id="inputPeso" min="0.5" max="100" step="0.1" value="15.0" placeholder="15.0" inputmode="decimal">
+            <span class="unit-tag">kg</span>
+          </div>
+        </div>
+
+        <!-- Idade (Anos e Meses juntos) -->
+        <div class="input-box box-age">
+          <label>Idade</label>
+          <div class="age-inline-group">
+            <div class="input-with-unit">
+              <input type="number" id="inputIdadeAnos" min="0" max="18" step="1" value="3" placeholder="3" inputmode="numeric">
+              <span class="unit-tag">anos</span>
+            </div>
+            <div class="input-with-unit">
+              <input type="number" id="inputIdadeMeses" min="0" max="11" step="1" value="0" placeholder="0" inputmode="numeric">
+              <span class="unit-tag">meses</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Barra de Pesquisa de Medicamentos -->
+      <div class="search-bar-wrapper">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="sheetSearchInput" placeholder="Pesquisar medicamento ou droga (ex: Ceftriaxona, Adrenalina, Midazolam, Fentanil...)" autocomplete="off">
+          <button id="clearSearchBtn" class="btn-clear-search hidden" title="Limpar pesquisa">&times;</button>
+        </div>
+      </div>
+
+      <!-- ==========================================================================
+           FOLHA DE ATENDIMENTO DE EMERGÊNCIA
+           ========================================================================== -->
+      <section id="tab-folha-oficial" class="sheet-main-section">
+        <div class="paper-preview-wrapper">
+          <div class="paper-sheet" id="printArea">
+            <!-- Header Simples -->
+            <div class="sheet-header">
+              <div class="sheet-title-only">
+                <h2>Folha de Atendimento de Emergência em Pediatria</h2>
+              </div>
+              <div class="patient-info-line">
+                <div class="info-cell cell-name">
+                  <span class="info-label">Nome:</span>
+                  <span class="info-val" id="sheetNome">PACIENTE PEDIÁTRICO</span>
+                </div>
+                <div class="info-cell cell-peso">
+                  <span class="info-label">Peso:</span>
+                  <span class="info-val" id="sheetPeso">15,00 Kg</span>
+                </div>
+                <div class="info-cell cell-idade">
+                  <span class="info-label">Idade:</span>
+                  <span class="info-val" id="sheetIdade">3 anos</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabela Principal de Medicações (Com Subtítulo para Contínuas) -->
+            <div class="sheet-table-wrapper">
+              <table class="sheet-table">
+                <thead>
+                  <tr>
+                    <th style="width: 28%;">DROGA E APRESENTAÇÃO</th>
+                    <th style="width: 14%;">DOSE</th>
+                    <th style="width: 48%;">PRESCRIÇÃO</th>
+                    <th style="width: 10%;">Doses menores 1ml</th>
+                  </tr>
+                </thead>
+                <tbody id="officialTableBody">
+                  <!-- Injetado dinamicamente via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Tabela de Equipamentos e Via Aérea -->
+            <div class="sheet-equip-wrapper">
+              <table class="sheet-equip-table">
+                <thead>
+                  <tr>
+                    <th>Tubo traqueal:</th>
+                    <th>Lamina Laringosc.</th>
+                    <th>Fixação gengiva:</th>
+                    <th>Sonda aspirar:</th>
+                    <th>Jelco Desc. Toracica:</th>
+                    <th>Dreno Torax:</th>
+                    <th>Cateter venoso Central</th>
+                    <th>Jelco PIA</th>
+                    <th>SVD</th>
+                    <th>Bougie:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="tblTubo" data-label="Tubo traqueal:">4,5 com cuff</td>
+                    <td id="tblLamina" data-label="Lâmina:">curva 1-2</td>
+                    <td id="tblFixacao" data-label="Fixação gengiva:">11 cm</td>
+                    <td id="tblSonda" data-label="Sonda aspirar:">8 Fr</td>
+                    <td id="tblJelcoDesc" data-label="Jelco Descompressão:">18 G</td>
+                    <td id="tblDreno" data-label="Dreno Tórax:">16-20 Fr</td>
+                    <td id="tblCvc" data-label="Cateter Central (CVC):">4F/20-22G</td>
+                    <td id="tblJelcoPia" data-label="Jelco PIA:">22-24 G</td>
+                    <td id="tblSvd" data-label="SVD:">8-10 Fr</td>
+                    <td id="tblBougie" data-label="Bougie:">6 Fr</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Faixa de Choque / Terapia Elétrica -->
+            <div class="sheet-shock-bar">
+              <div class="shock-left">
+                <span class="shock-title">Desfibrilação:</span>
+                <span class="shock-dose"><strong>1ª dose:</strong> <span id="tblDesfib1" class="shock-val">30 J</span></span>
+                <span class="shock-dose"><strong>2ª dose:</strong> <span id="tblDesfib2" class="shock-val">60 J</span></span>
+              </div>
+              <div class="shock-right">
+                <span class="shock-title">Cardioversão:</span>
+                <span class="shock-dose"><span id="tblCardioversao" class="shock-val">15 J</span></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
