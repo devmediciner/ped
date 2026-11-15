@@ -938,12 +938,9 @@ function renderOfficialTable(peso) {
         if (drug.subType) {
           drugTitle += ` <span class="sub-tag">${drug.subType}</span>`;
         }
-        // No mobile: dose ao lado do nome; no desktop/web: coluna separada
-        const mobileDoseTag = `<span class="mobile-dose-tag">(${subRow.dose})</span>`;
-
         html += `
           <tr>
-            <td class="td-drug" data-label="Droga">${drugTitle}${mobileDoseTag}</td>
+            <td class="td-drug" data-label="Droga">${drugTitle}</td>
             <td class="td-dose" data-label="Dose">${subRow.dose}</td>
             <td class="td-presc" data-label="Prescrição">${subRow.presc}</td>
             <td class="td-ue ${subRow.ue ? '' : 'ue-empty'}" data-label="Doses < 1ml">${ueDisplay}</td>
@@ -976,12 +973,10 @@ function renderOfficialTable(peso) {
       if (drug.subType) {
         drugTitle += ` <span class="sub-tag">${drug.subType}</span>`;
       }
-      // No mobile: dose ao lado do nome; no desktop/web: coluna separada
-      const mobileDoseTag = doseText ? `<span class="mobile-dose-tag">(${doseText})</span>` : '';
 
       html += `
         <tr>
-          <td class="td-drug" data-label="Droga">${drugTitle}${mobileDoseTag}</td>
+          <td class="td-drug" data-label="Droga">${drugTitle}</td>
           <td class="td-dose" data-label="Dose">${doseText}</td>
           <td class="td-presc" data-label="Prescrição">${calc.prescricaoHtml}</td>
           <td class="td-ue ${calc.ue100 ? '' : 'ue-empty'}" data-label="Doses < 1ml">${ueDisplay}</td>
